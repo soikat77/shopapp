@@ -1,7 +1,8 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopapp/screens/product_details.dart';
+
+import './screens/product_details.dart';
 import './screens/product_overview.dart';
 import './providers/products_provider.dart';
 
