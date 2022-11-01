@@ -2,8 +2,9 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './screens/product_details.dart';
 import './screens/product_overview.dart';
+import './screens/product_details.dart';
+import './screens/cart_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           routes: {
             ProductDetailsScreen.routeName: (context) =>
                 const ProductDetailsScreen(),
+            CartScreen.routeName: (context) => const CartScreen(),
           },
         );
       }),
