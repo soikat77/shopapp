@@ -1,12 +1,14 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopapp/screens/order_screen.dart';
 
 import './screens/product_overview.dart';
 import './screens/product_details.dart';
 import './screens/cart_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
+import './providers/order.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
+        ChangeNotifierProvider.value(
+          value: Orders(),
+        ),
       ],
       child: DynamicColorBuilder(
           builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
             ProductDetailsScreen.routeName: (context) =>
                 const ProductDetailsScreen(),
             CartScreen.routeName: (context) => const CartScreen(),
+            OrderScreen.routName: (context) => const OrderScreen(),
           },
         );
       }),

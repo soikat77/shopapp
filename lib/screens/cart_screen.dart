@@ -1,12 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopapp/providers/order.dart';
 
 import '../providers/cart.dart';
 import '../widgets/cart_item.dart' as c_i;
+import 'order_screen.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
   const CartScreen({super.key});
+
+  Future<void> showMyDialog(context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Your Order has ben placed.'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Thanks for using our app'),
+                Text('Shop more!!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Go to home'),
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+            ),
+            TextButton(
+              child: const Text('See orders'),
+              onPressed: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(OrderScreen.routName);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +74,13 @@ class CartScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 8),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Provider.of<Orders>(context, listen: false)
+                                  .addOrder(cart.items.values.toList(),
+                                      cart.totalAmmount);
+                              cart.clear();
+                              showMyDialog(context);
+                            },
                             child: Chip(
                               backgroundColor: Theme.of(context).primaryColor,
                               label: Text(
